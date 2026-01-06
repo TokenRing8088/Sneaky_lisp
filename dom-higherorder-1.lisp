@@ -111,9 +111,18 @@
 ;;;
 ;;; Napoveda: riesenie zalozte na 'mapcar'
 ;;;
+
+(defun op-riadok (cislo)
+  (mapcar #'(lambda (x) (list cislo x)) (mapcar #'(lambda (x) (1- x)) (reverse (maplist #'length (make-list 9)))))
+  )
+
 ;;; Alternativa: policka stvorca x,y 
 ;;;   (op-stvorec 0 0) -> 
 ;;;       ((0 0)(0 1)(0 2)(1 0)(1 1)(1 2)(2 0)(2 1)(2 2))
+
+(defun op-stvorec (riadok stlpec)
+  (mapcar #'(lambda (r s) (list r s)) (mapcan #'(lambda (y) (list y y y)) (list riadok (1+ riadok) (+ 2 riadok))) (mapcar #'(lambda (x) (+ (mod (1- x) 3) stlpec)) (reverse (maplist #'length (make-list 9)))))
+ )
 
 
 ;;; Zo zoznamu navzajom roznych cisel odstrante tie cisla ktore kazia 
